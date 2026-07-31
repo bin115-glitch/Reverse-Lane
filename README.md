@@ -80,6 +80,13 @@ When flashing with STM32CubeProgrammer:
 
 The OLED framebuffer is **128 x 64 pixels, 1-bit**. Fusion Flight uses a road with **4 lanes**. The player vehicle stays near the left side and can move between lanes, jump forward, and dodge vehicles moving from right to left.
 
+<table align="center">
+  <tr>
+    <td align="center"><img src="resources/images/screens/scr_gameplay_layout.svg" alt="Fusion Flight OLED gameplay layout" width="768"/></td>
+  </tr>
+</table>
+<p align="center"><strong><em>Figure 2:</em></strong> Full 128 x 64 OLED layout with real lanes and current bitmap objects.</p>
+
 ### Current Runtime Constants
 
 | Constant | Value | Meaning |
@@ -168,6 +175,13 @@ static const game_vehicle_type_t vehicle_types[] = {
 ```
 
 
+### Full Frame Preview
+
+The complete OLED mockup below is generated from the current firmware bitmap arrays and road constants. It shows the real 4-lane layout on a 128 x 64 framebuffer.
+
+```text
+resources/images/screens/scr_gameplay_layout.svg
+```
 ### Bitmap Preview Files
 
 The README previews below are generated from the same byte arrays used by firmware:
