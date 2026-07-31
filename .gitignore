@@ -1,0 +1,55 @@
+# Build folders
+build/
+build*/
+**/build/
+**/build*/
+
+# ARM embedded build outputs
+*.o
+*.d
+*.a
+*.elf
+*.axf
+*.bin
+*.hex
+*.map
+*.lst
+*.su
+*.gcno
+*.gcda
+*.gcov
+*.dis
+*.sym
+
+# Generated dependency/cache files
+.dep/
+.dirstamp
+.cache/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.bak
+*.orig
+*.rej
+*~
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local transfer/archive artifacts
+*.zip
+*.rar
+*.7z
+*.tar
+*.tar.gz
+*.tgz
+
+# Keep source assets, docs, and hardware files tracked by default.
