@@ -134,13 +134,13 @@ static bool jump_has_clear_speed();
 
 ## Game Objects
 
-| Object | Bitmap | Size | Speed Step | Hitbox | Jumpable | Lane Change |
-|---|---|---:|---:|---:|---|---|
-| Player | `bitmap_player` | `17 x 18 px` | controlled | `x + 4`, width `11` | yes | manual |
-| Jump Player | `bitmap_player_large` | `24 x 17 px` | controlled | animation only | yes | manual |
-| Moto | `bitmap_moto` | `18 x 10 px` | `2` | `x + 3`, width `12` | yes | yes |
-| F1 | `bitmap_f1` | `27 x 10 px` | `3` | `x + 4`, width `19` | yes | yes |
-| Container | `bitmap_container` | `40 x 13 px` | `1` | `x + 4`, width `32` | level gated | no |
+| Preview | Object | Bitmap | Size | Speed Step | Hitbox | Jumpable | Lane Change |
+|:---:|---|---|---:|---:|---:|---|---|
+| <img src="resources/images/bitmap/player.svg" width="85"/> | Player | `bitmap_player` | `17 x 18 px` | controlled | `x + 4`, width `11` | yes | manual |
+| <img src="resources/images/bitmap/player_jump.svg" width="120"/> | Jump Player | `bitmap_player_large` | `24 x 17 px` | controlled | animation only | yes | manual |
+| <img src="resources/images/bitmap/moto.svg" width="90"/> | Moto | `bitmap_moto` | `18 x 10 px` | `2` | `x + 3`, width `12` | yes | yes |
+| <img src="resources/images/bitmap/f1.svg" width="135"/> | F1 | `bitmap_f1` | `27 x 10 px` | `3` | `x + 4`, width `19` | yes | yes |
+| <img src="resources/images/bitmap/container.svg" width="200"/> | Container | `bitmap_container` | `40 x 13 px` | `1` | `x + 4`, width `32` | level gated | no |
 
 Vehicle type definition:
 
@@ -167,6 +167,18 @@ static const game_vehicle_type_t vehicle_types[] = {
 };
 ```
 
+
+### Bitmap Preview Files
+
+The README previews below are generated from the same byte arrays used by firmware:
+
+```text
+resources/images/bitmap/player.svg
+resources/images/bitmap/player_jump.svg
+resources/images/bitmap/moto.svg
+resources/images/bitmap/f1.svg
+resources/images/bitmap/container.svg
+```
 ## Bitmap Assets
 
 The OLED is monochrome, so PNG/JPG assets are not loaded directly. Each asset must be converted into a C/C++ byte array and compiled into firmware.
