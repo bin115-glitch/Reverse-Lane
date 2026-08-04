@@ -138,7 +138,8 @@ static int level_speed_bonus();
 static void vehicle_try_change_lane(int index);
 static bool jump_has_clear_speed();
 ```
-
+## VIDEO DEMO
+<video href="https://github.com/user-attachments/assets/5d92aeeb-a82b-4d70-9fbb-fb683e4e7e60">
 ## Game Objects
 
 | Preview | Object | Bitmap | Size | Speed Step | Hitbox | Jumpable | Lane Change |
