@@ -304,7 +304,7 @@ Start address : 0x08003000
 
 ## IV. Fusion Flight Runtime Sequence by Time Thread
 
-This diagram is derived from the implemented flow in `scr_game_handle()`, `game_init()`, `game_update()`, `game_spawn_vehicle()`, `vehicle_try_change_lane()`, `game_check_collision()` and `view_scr_game()`. It describes the actual lane-dodge runtime used by Fusion Flight; no Bug_Storm projectile, formation or boss logic is reused.
+This diagram is derived from the implemented flow in `scr_game_handle()`, `game_init()`, `game_update()`, `game_spawn_vehicle()`, `vehicle_try_change_lane()`, `game_check_collision()` and `view_scr_game()`. It describes the actual lane-dodge runtime used by Fusion Flight.
 
 ```mermaid
 sequenceDiagram
@@ -520,4 +520,3 @@ The repository includes a `.gitignore` that excludes build outputs and temporary
 |---|---|
 | AK Embedded Base Kit | https://epcb.vn/products/ak-embedded-base-kit-lap-trinh-nhung-vi-dieu-khien-mcu |
 | AK Blog and Tutorial | https://epcb.vn/blogs/ak-embedded-software |
-| Bug_Storm reference style | https://github.com/letuandat269/Bug_Storm |
