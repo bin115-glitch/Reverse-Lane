@@ -302,6 +302,190 @@ File          : ak-base-kit-stm32l151-application.bin
 Start address : 0x08003000
 ```
 
+## IV. Fusion Flight Runtime Sequence by Time Thread
+
+This diagram is derived from the implemented flow in `scr_game_handle()`, `game_init()`, `game_update()`, `game_spawn_vehicle()`, `vehicle_try_change_lane()`, `game_check_collision()` and `view_scr_game()`. It describes the actual lane-dodge runtime used by Fusion Flight; no Bug_Storm projectile, formation or boss logic is reused.
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Player
+    participant Button as Button Driver
+    participant AK as AK Kernel / Timer
+    participant Screen as scr_game_handle()
+    participant Game as Game State
+    participant Pool as Vehicle Pool[7]
+    participant Collision as Collision / Jump Check
+    participant Render as view_scr_game()
+    participant OLED as OLED Framebuffer
+
+    rect rgb(235, 245, 255)
+        Note over Player,OLED: SCREEN_ENTRY - START GAME
+        Player->>AK: Select Fusion Flight from startup menu
+        AK->>Screen: SCREEN_ENTRY
+        activate Screen
+        Screen->>Game: game_init()
+        Game->>Game: player_x=PLAYER_START_X, player_lane=1
+        Game->>Game: score=0, level=1, spawn_period=28
+        Game->>Pool: Clear all vehicle.active flags
+        Screen->>AK: timer_set(AC_DISPLAY_GAME_TICK, 80 ms, periodic)
+        Screen->>Render: Render initial gameplay frame
+        Render->>OLED: Draw HUD, 4 lanes, player and vehicles
+        deactivate Screen
+    end
+
+    rect rgb(240, 255, 240)
+        Note over Player,OLED: PERIODIC GAME TICK - MAIN TIME THREAD
+        loop Every AC_DISPLAY_GAME_TICK while game_over == false
+            AK->>Screen: AC_DISPLAY_GAME_TICK
+            activate Screen
+            Screen->>Game: game_update()
+
+            Game->>Game: game_update_difficulty()
+            alt score >= 100
+                Game->>Game: level = 4
+            else score >= 50
+                Game->>Game: level = 3
+            else score >= 10
+                Game->>Game: level = 2
+            else score < 10
+                Game->>Game: level = 1
+            end
+            Game->>Game: spawn_period = 28 - (level - 1) * 5, min 11
+
+            opt UP and DOWN are both held while player is ahead
+                Game->>Game: player_returning = true
+            end
+
+            alt player_jump_ticks > 0
+                Game->>Game: Move player forward by jump_auto_dx[]
+                Game->>Game: player_jump_ticks--
+            else player_returning == true
+                Game->>Game: Move player back by PLAYER_RETURN_STEP
+                opt player_x <= PLAYER_START_X
+                    Game->>Game: Stop returning at PLAYER_START_X
+                end
+            else pending jump tap exists
+                Game->>Game: player_sw4_tap_ticks--
+                opt tap countdown reaches zero
+                    Game->>Game: player_jump_ticks = PLAYER_JUMP_TICKS
+                end
+            end
+
+            Game->>Game: spawn_counter--
+            opt spawn_counter <= 0
+                Game->>Pool: game_spawn_vehicle()
+                Pool->>Pool: Find inactive slot
+                Pool->>Pool: Choose random lane
+                Pool->>Pool: Reject spawn if lane_has_near_vehicle()
+                Pool->>Pool: Choose Moto/F1/Container based on level
+                Pool->>Pool: Activate vehicle at x = LCD_WIDTH - 1
+                opt level >= 4 and random chance hits
+                    Game->>Pool: Spawn one extra vehicle
+                end
+                Game->>Game: Reset spawn_counter with random offset
+            end
+
+            loop For each active vehicle
+                Game->>Pool: vehicle_try_change_lane(index)
+                alt vehicle can change lane and level >= 2
+                    Pool->>Pool: Decrease lane_change_counter
+                    opt counter reached zero and random chance passes
+                        Pool->>Pool: Try adjacent lane
+                        Pool->>Pool: Move lane only if target lane is clear
+                    end
+                end
+                Game->>Pool: Move vehicle left by type.step + level_speed_bonus()
+                opt vehicle passed player and scored == false
+                    Game->>Game: score++
+                    Pool->>Pool: vehicle.scored = true
+                end
+                opt vehicle exits left side
+                    Pool->>Pool: vehicle.active = false
+                end
+            end
+
+            Game->>Collision: game_check_collision()
+            Collision->>Collision: Compute player hitbox with jump offset
+            loop For each active vehicle in same lane
+                Collision->>Collision: Compare player hitbox with vehicle hitbox
+                alt hitbox overlaps and player is jumping
+                    Collision->>Collision: Check vehicle.jumpable or jump_has_clear_speed()
+                    opt jump is valid
+                        Collision-->>Game: Continue, no crash
+                    end
+                else hitbox overlaps and jump is invalid
+                    Collision-->>Game: Collision detected
+                end
+            end
+
+            alt collision detected
+                Game->>Game: game_over = true
+                Game->>AK: timer_remove_attr(AC_DISPLAY_GAME_TICK)
+            end
+
+            Screen->>Render: view_scr_game()
+            Render->>OLED: Draw score, level, lane lines, vehicles, player
+            opt game_over == true
+                Render->>OLED: Draw GAME OVER overlay
+            end
+            deactivate Screen
+        end
+    end
+
+    rect rgb(255, 248, 235)
+        Note over Player,OLED: BUTTON EVENTS - PLAYER CONTROL THREAD
+        Player->>Button: Press UP / SW3
+        Button->>AK: AC_DISPLAY_BUTON_UP_PRESSED
+        AK->>Screen: Dispatch button message
+        alt game_over == true
+            Screen->>Game: game_init() and restart timer
+        else player is not jumping and lane > 0
+            Screen->>Game: player_lane--
+        end
+
+        Player->>Button: Press DOWN / SW2
+        Button->>AK: AC_DISPLAY_BUTON_DOWN_PRESSED
+        AK->>Screen: Dispatch button message
+        alt game_over == true
+            Screen->>Game: game_init() and restart timer
+        else player is not jumping and lane < ROAD_LANE_COUNT - 1
+            Screen->>Game: player_lane++
+        end
+
+        Player->>Button: Press MODE / SW4
+        Button->>AK: AC_DISPLAY_BUTON_MODE_PRESSED
+        AK->>Screen: Dispatch button message
+        alt game_over == true
+            Screen->>Game: game_init() and restart timer
+        else player is jumping or returning
+            Screen->>Game: Ignore press
+        else player_x > PLAYER_START_X and second tap arrives
+            Screen->>Game: player_returning = true
+        else player_x > PLAYER_START_X
+            Screen->>Game: Start short tap countdown
+        else player is at start position
+            Screen->>Game: player_jump_ticks = PLAYER_JUMP_TICKS
+        end
+
+        Player->>Button: Hold MODE
+        Button->>AK: AC_DISPLAY_BUTON_MODE_LONG_PRESSED
+        AK->>Screen: Dispatch long press
+        Screen->>AK: Remove game tick timer
+        Screen->>Screen: SCREEN_TRAN(scr_startup_handle, &scr_startup)
+    end
+```
+
+### Runtime Notes
+
+- The main game loop is timer-driven by `AC_DISPLAY_GAME_TICK` every `80 ms`.
+- Vehicles are stored in a fixed array: `vehicles[MAX_VEHICLES]`, currently `7` slots.
+- Score increases once per vehicle after it passes the player.
+- Difficulty changes only from score thresholds: `10`, `50`, and `100`.
+- Lane changing is enabled for Moto and F1 from level 2 onward.
+- Container does not change lane and is not directly jumpable at low level.
+- A jump avoids collision when the vehicle is jumpable, or when `jump_has_clear_speed()` allows large-object clearance.
+- Rendering is separated from updates: `game_update()` mutates state, then `view_scr_game()` draws HUD, lanes, vehicles, player and Game Over overlay.
 ## Project Structure
 
 ```text
