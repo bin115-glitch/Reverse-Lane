@@ -158,6 +158,10 @@ snake/
 |-- README.md
 ```
 
+## About Me
+
+I'm an embedded software developer focused on C/C++ firmware, event-driven systems and real-time applications on Linux/Ubuntu. My current work includes games on the AK Embedded Base Kit, camera module firmware and embedded communication using MQTT, HTTP and TLS.
+
 ## References
 
 | Topic | Link |
