@@ -1,4 +1,4 @@
-﻿<div align="center">
+<div align="center">
 
 ![MCU](https://img.shields.io/badge/MCU-STM32L151CBT6-03234B?style=flat-square&logo=stmicroelectronics)
 ![Display](https://img.shields.io/badge/OLED-128x64_1--bit-white?style=flat-square&labelColor=black)
@@ -64,6 +64,16 @@ Rules:
 - Moto and F1 can change lanes at higher levels.
 - Container is longer and harder to clear.
 - Jumping can avoid collision if the object is jumpable or the player has enough speed.
+
+## Video Demo
+
+<div align="center">
+  <video
+    src="https://github.com/user-attachments/assets/5d92aeeb-a82b-4d70-9fbb-fb683e4e7e60"
+    controls
+    width="700">
+  </video>
+</div>
 
 ## Game Objects
 
@@ -157,10 +167,6 @@ snake/
 |-- resources/        # README bitmap previews and OLED layout preview
 |-- README.md
 ```
-
-## About Me
-
-I'm an embedded software developer focused on C/C++ firmware, event-driven systems and real-time applications on Linux/Ubuntu. My current work includes games on the AK Embedded Base Kit, camera module firmware and embedded communication using MQTT, HTTP and TLS.
 
 ## References
 
