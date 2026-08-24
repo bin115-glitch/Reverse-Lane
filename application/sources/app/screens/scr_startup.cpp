@@ -34,7 +34,7 @@ void view_scr_startup() {
 		return;
 	}
 
-	startup_draw_item(2, "Fusion Flight", 0, startup_menu_index == 0);
+	startup_draw_item(2, "Reverse Lane", 0, startup_menu_index == 0);
 	startup_draw_item(23, "Cai dat", 1, startup_menu_index == 1);
 	startup_draw_item(44, "Thong ke", 2, startup_menu_index == 2);
 }

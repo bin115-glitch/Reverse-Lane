@@ -2,17 +2,17 @@
 
 ![MCU](https://img.shields.io/badge/MCU-STM32L151CBT6-03234B?style=flat-square&logo=stmicroelectronics)
 ![Display](https://img.shields.io/badge/OLED-128x64_1--bit-white?style=flat-square&labelColor=black)
-![Firmware](https://img.shields.io/badge/Firmware-Fusion_Flight-blue?style=flat-square)
+![Firmware](https://img.shields.io/badge/Firmware-Reverse_Lane-blue?style=flat-square)
 ![Language](https://img.shields.io/badge/Language-C%2FC%2B%2B-orange?style=flat-square)
 
 </div>
 
-# Fusion Flight
+# Reverse Lane
 
-**Fusion Flight** is a small 1-bit lane-dodge game for the **AK Embedded Base Kit STM32L151**. The player controls a vehicle moving against traffic, dodges incoming vehicles, jumps over obstacles and survives as the game becomes faster.
+**Reverse Lane** is a small 1-bit lane-dodge game for the **AK Embedded Base Kit STM32L151**. The player controls a vehicle moving against traffic, dodges incoming vehicles, jumps over obstacles and survives as the game becomes faster.
 
 <p align="center">
-  <img src="resources/images/readme_visual_overview_v2.svg" alt="Fusion Flight visual overview" width="850"/>
+  <img src="resources/images/readme_visual_overview_v2.svg" alt="Reverse Lane visual overview" width="850"/>
 </p>
 
 
@@ -47,7 +47,7 @@ Flash layout:
 ## Gameplay
 
 <p align="center">
-  <img src="resources/images/screens/scr_gameplay_layout.svg" alt="Fusion Flight OLED gameplay layout" width="760"/>
+  <img src="resources/images/screens/scr_gameplay_layout.svg" alt="Reverse Lane OLED gameplay layout" width="760"/>
 </p>
 
 Controls:
