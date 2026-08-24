@@ -174,4 +174,3 @@ snake/
 |---|---|
 | AK Embedded Base Kit | https://epcb.vn/products/ak-embedded-base-kit-lap-trinh-nhung-vi-dieu-khien-mcu |
 | AK Blog and Tutorial | https://epcb.vn/blogs/ak-embedded-software |
-| Bug_Storm reference style | https://github.com/letuandat269/Bug_Storm |
