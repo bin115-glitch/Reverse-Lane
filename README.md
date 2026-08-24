@@ -19,16 +19,18 @@ Drive against traffic, dodge incoming vehicles, jump over obstacles and survive 
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [Demo](#demo)
-- [Main Features](#main-features)
-- [Gameplay](#gameplay)
-- [Game Objects](#game-objects)
-- [Runtime Flow](#runtime-flow)
-- [I. Hardware](#i-hardware)
-- [Build and Flash](#build-and-flash)
-- [Project Structure](#project-structure)
-- [Documentation](#documentation)
+| No. | Section | Description |
+|---:|---|---|
+| 1 | [Hardware](#i-hardware) | Board images, MCU specification and flash partition layout |
+| 2 | [Introduction](#introduction) | Game overview and project purpose |
+| 3 | [Demo](#demo) | Gameplay video preview |
+| 4 | [Main Features](#main-features) | Core firmware and gameplay features |
+| 5 | [Gameplay](#gameplay) | Controls, rules and OLED layout |
+| 6 | [Game Objects](#game-objects) | Player, jump player, moto, F1 and container bitmaps |
+| 7 | [Runtime Flow](#runtime-flow) | Button, timer, update, collision and render sequence |
+| 8 | [Build and Flash](#build-and-flash) | Build command and STM32CubeProgrammer addresses |
+| 9 | [Project Structure](#project-structure) | Main folders in the repository |
+| 10 | [Documentation](#documentation) | Detailed Markdown guides and DOCX report |
 
 ## I. Hardware
 
