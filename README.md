@@ -108,32 +108,6 @@ Main gameplay code:
 ```text
 application/sources/app/screens/scr_game.cpp
 ```
-
-## Build
-
-Build bootloader:
-
-```bash
-cd boot
-make clean
-make
-```
-
-Build application:
-
-```bash
-cd application
-make clean
-make
-```
-
-Generated binaries:
-
-```text
-boot/build_ak-base-kit-stm32l151-boot/ak-base-kit-stm32l151-boot.bin
-application/build_ak-base-kit-stm32l151-application/ak-base-kit-stm32l151-application.bin
-```
-
 ## Flash
 
 Use STM32CubeProgrammer:
