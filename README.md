@@ -25,11 +25,43 @@ Drive against traffic, dodge incoming vehicles, jump over obstacles and survive 
 - [Gameplay](#gameplay)
 - [Game Objects](#game-objects)
 - [Runtime Flow](#runtime-flow)
-- [Hardware Target](#hardware-target)
-- [Board](#board)
+- [I. Hardware](#i-hardware)
 - [Build and Flash](#build-and-flash)
 - [Project Structure](#project-structure)
 - [Documentation](#documentation)
+
+## I. Hardware
+
+<p align="center">
+  <img width="343" height="319" alt="AK Embedded Base Kit STM32L151" src="https://github.com/user-attachments/assets/f015bf1e-d096-4f00-a36f-6b97a3643bb0"/>
+</p>
+
+<p align="center"><b>Figure 1:</b> AK Embedded Base Kit - STM32L151</p>
+
+<p align="center">
+  <img width="853" height="473" alt="AK Embedded Base Kit hardware layout" src="https://github.com/user-attachments/assets/7f76fc2a-659a-4de8-a99b-497f18e39d33"/>
+</p>
+
+The **AK Embedded Base Kit** is an evaluation kit for embedded software learners. It integrates a 1.54-inch OLED LCD, 3 push buttons and a buzzer, which are enough to study event-driven systems through a small real-time game. The board also exposes RS485, Qwiic and Grove connectors for broader prototyping.
+
+### Specifications
+
+| Item | Value |
+|---|---|
+| MCU | STM32L151CBT6 |
+| CPU | Arm Cortex-M3 |
+| RAM | 16 KB |
+| Flash | 128 KB |
+| Display | 128 x 64 monochrome OLED |
+| Input | SW2, SW3, SW4 |
+
+### Flash Partition Layout
+
+| Memory Range | Size | Partition | Description |
+|---|---:|---|---|
+| `0x08000000 - 0x08001FFF` | 8 KB | Bootloader | AK bootloader partition |
+| `0x08002000 - 0x08002FFF` | 4 KB | BSF Shared | Shared data between bootloader and application |
+| `0x08003000 - 0x0801FFFF` | 116 KB | Application | Reverse Lane firmware |
 
 ## Introduction
 
@@ -120,31 +152,6 @@ Main gameplay code:
 ```text
 application/sources/app/screens/scr_game.cpp
 ```
-
-## Hardware Target
-
-```text
-MCU      : STM32L151CBT6
-CPU      : Arm Cortex-M3
-Flash    : 128 KB
-RAM      : 16 KB
-Display  : 128 x 64 monochrome OLED
-Input    : SW2, SW3, SW4
-```
-
-Flash layout:
-
-| Binary | Address |
-|---|---:|
-| `ak-base-kit-stm32l151-boot.bin` | `0x08000000` |
-| `ak-base-kit-stm32l151-application.bin` | `0x08003000` |
-
-## Board
-
-<p align="center">
-<img width="343" height="319" alt="image" src="https://github.com/user-attachments/assets/f015bf1e-d096-4f00-a36f-6b97a3643bb0" />
-
-</p>
 
 ## Build and Flash
 
