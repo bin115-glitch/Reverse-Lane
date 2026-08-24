@@ -15,6 +15,14 @@
   <img src="resources/images/readme_visual_overview_v2.svg" alt="Reverse Lane visual overview" width="850"/>
 </p>
 
+## Documentation
+
+| Document | Purpose |
+|---|---|
+| [Getting Started Guide](docs/01-guide-getting-started.md) | Build, flash, project structure and where to start reading code |
+| [Game Object Sequences](docs/02-design-sequence-object.md) | Detailed object design for Player, Jump Player, Moto, F1, Container and vehicle pool |
+| [Runtime Signal Processing](docs/03-design-sequence-runtime.md) | AK message flow, button events, 80 ms game tick, render flow and game-over sequence |
+| [DOCX Project Report](docs/Reverse_Lane_Game_Document.docx) | Full Word document for presentation/report submission |
 
 
 ## Hardware Target
