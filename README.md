@@ -16,15 +16,6 @@
 </p>
 
 
-## Main Features
-
-- Event-driven screen flow using AK messages.
-- Timer-based gameplay with `AC_DISPLAY_GAME_TICK` every `80 ms`.
-- 128 x 64 monochrome OLED rendering through a 1-bit framebuffer.
-- 4-lane traffic dodge gameplay.
-- Player jump, restart and menu return controls.
-- Fixed vehicle pool with Moto, F1 and Container objects.
-- Difficulty levels based on score: `0`, `10`, `50`, `100`.
 
 ## Hardware Target
 
