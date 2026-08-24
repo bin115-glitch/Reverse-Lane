@@ -26,6 +26,7 @@ Drive against traffic, dodge incoming vehicles, jump over obstacles and survive 
 - [Game Objects](#game-objects)
 - [Runtime Flow](#runtime-flow)
 - [Hardware Target](#hardware-target)
+- [Board](#board)
 - [Build and Flash](#build-and-flash)
 - [Project Structure](#project-structure)
 - [Documentation](#documentation)
@@ -137,6 +138,12 @@ Flash layout:
 |---|---:|
 | `ak-base-kit-stm32l151-boot.bin` | `0x08000000` |
 | `ak-base-kit-stm32l151-application.bin` | `0x08003000` |
+
+## Board
+
+<p align="center">
+  <img width="343" height="319" alt="AK Embedded Base Kit board" src="https://github.com/user-attachments/assets/b663132f-98f3-4d98-809d-49b3fc4b500f"/>
+</p>
 
 ## Build and Flash
 
