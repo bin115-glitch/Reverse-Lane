@@ -23,14 +23,13 @@ Drive against traffic, dodge incoming vehicles, jump over obstacles and survive 
 |---:|---|---|
 | 1 | [Hardware](#i-hardware) | Board images, MCU specification and flash partition layout |
 | 2 | [Introduction](#introduction) | Game overview and project purpose |
-| 3 | [Demo](#demo) | Gameplay video preview |
-| 4 | [Main Features](#main-features) | Core firmware and gameplay features |
-| 5 | [Gameplay](#gameplay) | Controls, rules and OLED layout |
-| 6 | [Game Objects](#game-objects) | Player, jump player, moto, F1 and container bitmaps |
-| 7 | [Runtime Flow](#runtime-flow) | Button, timer, update, collision and render sequence |
-| 8 | [Build and Flash](#build-and-flash) | Build command and STM32CubeProgrammer addresses |
-| 9 | [Project Structure](#project-structure) | Main folders in the repository |
-| 10 | [Documentation](#documentation) | Detailed Markdown guides and DOCX report |
+| 3 | [Demo](#demo) | Demo video preview |
+| 4 | [Main Features](#main-features) | Core firmware and game features |
+| 5 | [Game Objects](#game-objects) | Player, jump player, moto, F1 and container bitmaps |
+| 6 | [Basic Game Sequence Logic](#iv-basic-game-sequence-logic) | Time-ordered game messages, actions and render sequence |
+| 7 | [Build and Flash](#build-and-flash) | Build command and STM32CubeProgrammer addresses |
+| 8 | [Project Structure](#project-structure) | Main folders in the repository |
+| 9 | [Documentation](#documentation) | Detailed Markdown guides and DOCX report |
 
 ## I. Hardware
 
@@ -84,35 +83,12 @@ The project is designed for the **AK Embedded Base Kit STM32L151** with a **128 
 ## Main Features
 
 - Event-driven screen flow using AK messages and timers.
-- OLED gameplay rendered from 1-bit C/C++ bitmap arrays.
+- OLED frames rendered from 1-bit C/C++ bitmap arrays.
 - Three-lane road layout with incoming traffic.
 - Player movement, lane switching and jump animation.
 - Moto, F1 and container objects with different sizes and behavior.
 - Score-based level progression and increasing speed.
 - Game-over, restart and menu navigation flow.
-
-## Gameplay
-
-<p align="center">
-  <img src="resources/images/screens/scr_gameplay_layout.svg" alt="Reverse Lane OLED gameplay layout" width="760"/>
-</p>
-
-### Controls
-
-| Button | Action |
-|---|---|
-| `SW3 / UP` | Move up one lane |
-| `SW2 / DOWN` | Move down one lane |
-| `SW4 / MODE` | Jump / restart after Game Over |
-| Long `SW4 / MODE` | Back to menu |
-
-### Rules
-
-- Score increases when the player successfully avoids a vehicle.
-- Moto and F1 can change lanes at higher levels.
-- Container is longer and harder to clear.
-- Jumping can avoid collision if the object is jumpable or the player has enough speed.
-- Level increases as the score reaches game milestones.
 
 ## Game Objects
 
@@ -126,30 +102,79 @@ The project is designed for the **AK Embedded Base Kit STM32L151** with a **128 
 
 Bitmap assets are converted from images into C/C++ byte arrays and drawn with `drawBitmap()`.
 
-## Runtime Flow
+## IV. Basic Game Sequence Logic
+
+The diagram below shows the **runtime flow** of Reverse Lane: screen entry, periodic game tick, player button actions, collision handling, game-over restart and exit back to the menu.
+
+> **Note:** For a more detailed sequence flow, see [Runtime Signal Processing](docs/03-design-sequence-runtime.md).
 
 ```mermaid
-flowchart LR
-    Button["SW2 / SW3 / SW4"]
-    Message["AK Message"]
-    Screen["scr_game_handle()"]
-    Timer["80 ms Timer Tick"]
-    Update["game_update()"]
-    Objects["Vehicle Pool"]
-    Collision["Collision + Jump Check"]
-    Render["view_scr_game()"]
-    OLED["128 x 64 OLED"]
+%%{init: {'theme':'dark', 'sequence': {'actorMargin': 50, 'noteMargin': 10}}}%%
+sequenceDiagram
+    autonumber
+    actor Player
+    participant AK as AK Kernel
+    participant Scr as scr_game_handle()
+    participant Game as Game State
+    participant Obj as Vehicle Pool
+    participant View as view_scr_game()
+    participant OLED as OLED
 
-    Button --> Message --> Screen
-    Timer --> Screen
-    Screen --> Update
-    Update --> Objects
-    Objects --> Collision
-    Collision --> Render
-    Render --> OLED
+    rect rgb(30, 90, 60)
+        Note left of Player: SCREEN_ENTRY
+        AK->>Scr: SCREEN_ENTRY
+        activate Scr
+        Scr->>Game: game_init()
+        Scr->>Obj: reset player + vehicles
+        Scr->>AK: timer_set(AC_DISPLAY_GAME_TICK, 80 ms)
+        deactivate Scr
+    end
+
+    rect rgb(85, 45, 115)
+        Note left of Player: GAME PLAY
+        AK->>Scr: AC_DISPLAY_GAME_TICK
+        activate Scr
+        Scr->>Game: game_update()
+        Game->>Obj: move vehicles / spawn traffic
+        Game->>Game: update level + score
+        Game->>Game: check collision + jump state
+        Game->>View: render current frame
+        View->>OLED: drawBitmap() + update()
+        deactivate Scr
+    end
+
+    rect rgb(30, 85, 135)
+        Note left of Player: PLAYER ACTION
+        Player->>AK: SW3 / UP
+        AK->>Scr: AC_DISPLAY_BUTON_UP_PRESSED
+        Scr->>Game: move player to upper lane
+
+        Player->>AK: SW2 / DOWN
+        AK->>Scr: AC_DISPLAY_BUTON_DOWN_PRESSED
+        Scr->>Game: move player to lower lane
+
+        Player->>AK: SW4 / MODE
+        AK->>Scr: AC_DISPLAY_BUTON_MODE_PRESSED
+        Scr->>Game: start jump / restart if game over
+    end
+
+    rect rgb(135, 45, 55)
+        Note left of Player: GAME OVER / EXIT
+        Game->>Game: game_over = true
+        Player->>AK: SW4 / MODE
+        AK->>Scr: AC_DISPLAY_BUTON_MODE_PRESSED
+        Scr->>Game: game_init()
+
+        Player->>AK: Long SW4 / MODE
+        AK->>Scr: AC_DISPLAY_BUTON_MODE_LONG_PRESSED
+        Scr->>AK: timer_remove_attr(AC_DISPLAY_GAME_TICK)
+        Scr->>Scr: SCREEN_TRAN(scr_startup_handle)
+    end
 ```
 
-Main gameplay code:
+<p align="center"><strong><em>Figure:</em></strong> Basic game sequence logic</p>
+
+Main game code:
 
 ```text
 application/sources/app/screens/scr_game.cpp
