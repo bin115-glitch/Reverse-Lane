@@ -996,7 +996,7 @@
       <rect x="0" y="35" width="128" height="1" class="lane"/>
       <rect x="0" y="49" width="128" height="1" class="lane"/>
       <rect x="0" y="63" width="128" height="1" class="lane"/>
-      <use href="#sprite-player" x="6" y="25" width="17" height="18"/>
+      <use href="#sprite-player" x="6" y="19" width="17" height="18"/>
       <use href="#sprite-moto" x="64" y="24" width="18" height="10"/>
       <use href="#sprite-f1" x="91" y="38" width="27" height="10"/>
       <use href="#sprite-container" x="70" y="10" width="40" height="13"/>
@@ -1026,9 +1026,11 @@
     <rect x="88" y="140" width="118" height="34" rx="5" class="tab"/>
     <text x="147" y="163" text-anchor="middle" class="label">OBJECTS</text>
     <rect x="83" y="188" width="128" height="58" class="screen"/>
-    <use href="#sprite-moto" x="96" y="203" width="22" height="12" class="sprite"/>
-    <use href="#sprite-f1" x="132" y="203" width="32" height="12" class="sprite"/>
-    <use href="#sprite-container" x="96" y="222" width="48" height="16" class="sprite"/>
+    <use href="#sprite-player" x="94" y="196" width="20" height="21" class="sprite"/>
+    <use href="#sprite-player-jump" x="133" y="195" width="30" height="22" class="sprite"/>
+    <use href="#sprite-moto" x="94" y="226" width="21" height="12" class="sprite"/>
+    <use href="#sprite-f1" x="124" y="226" width="31" height="12" class="sprite"/>
+    <use href="#sprite-container" x="164" y="224" width="36" height="13" class="sprite"/>
   </g>
 
   <g class="pixel" filter="url(#shadow)">
@@ -1048,9 +1050,9 @@
     <rect x="208" y="496" width="484" height="2" fill="#f8fafc"/>
     <text x="450" y="434" text-anchor="middle" class="small">Animated lane strip - same sprite bitmaps used in firmware</text>
     <g clip-path="url(#lane-strip-clip)">
-      <g transform="translate(230 458)" class="sprite">
-        <use href="#sprite-player" width="20" height="21" class="jumpBase"/>
-        <use href="#sprite-player-jump" x="36" y="-9" width="29" height="20" class="jumpLarge"/>
+      <g transform="translate(230 452)" class="sprite">
+        <use href="#sprite-player" width="17" height="18" class="jumpBase"/>
+        <use href="#sprite-player-jump" x="36" y="-8" width="24" height="17" class="jumpLarge"/>
       </g>
       <g class="sprite carA"><use href="#sprite-moto" x="620" y="456" width="22" height="12"/></g>
       <g class="sprite carB"><use href="#sprite-f1" x="530" y="471" width="32" height="12"/></g>
