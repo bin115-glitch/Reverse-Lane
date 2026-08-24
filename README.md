@@ -12,7 +12,7 @@
 **Fusion Flight** is a small 1-bit lane-dodge game for the **AK Embedded Base Kit STM32L151**. The player controls a vehicle moving against traffic, dodges incoming vehicles, jumps over obstacles and survives as the game becomes faster.
 
 <p align="center">
-  <img src="resources/images/readme_visual_overview.svg" alt="Fusion Flight visual overview" width="850"/>
+  <img src="resources/images/readme_visual_overview_v2.svg" alt="Fusion Flight visual overview" width="850"/>
 </p>
 
 
