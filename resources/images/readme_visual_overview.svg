@@ -14,6 +14,9 @@
     <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
       <feDropShadow dx="0" dy="8" stdDeviation="5" flood-color="#000" flood-opacity="0.38"/>
     </filter>
+    <clipPath id="lane-strip-clip">
+      <rect x="200" y="442" width="500" height="62" rx="4"/>
+    </clipPath>
     <style>
       .pixel { shape-rendering: crispEdges; }
       .title { font: 800 48px monospace; fill: #f8fafc; letter-spacing: 2px; }
@@ -28,7 +31,7 @@
       .screen { fill: #020617; stroke: #f8fafc; stroke-width: 2; }
       .sprite { color: #f8fafc; }
       .lane { fill: #f8fafc; opacity: 0.92; }
-      @keyframes laneLeft { from { transform: translateX(150px); } to { transform: translateX(-500px); } }
+      @keyframes laneLeft { from { transform: translateX(70px); } to { transform: translateX(-500px); } }
       @keyframes playerJump { 0%,100% { transform: translate(0,0) scale(1); opacity: 1; } 35%,60% { transform: translate(42px,-16px) scale(1.18); opacity: 0; } }
       @keyframes playerJumpLarge { 0%,24%,76%,100% { opacity: 0; } 35%,60% { opacity: 1; } }
       .carA { animation: laneLeft 4.8s linear infinite; }
@@ -1001,17 +1004,6 @@
   </g>
 
   <g class="pixel" filter="url(#shadow)">
-    <rect x="54" y="154" width="186" height="116" rx="6" class="panel"/>
-    <rect x="91" y="140" width="112" height="34" rx="5" class="tab"/>
-    <text x="147" y="163" text-anchor="middle" class="label">BOARD</text>
-    <rect x="88" y="190" width="112" height="52" fill="#1f2937" stroke="#94a3b8" stroke-width="2"/>
-    <rect x="104" y="202" width="80" height="28" fill="#334155"/>
-    <circle cx="116" cy="211" r="6" fill="#f87171"/>
-    <circle cx="176" cy="223" r="6" fill="#9ca3af"/>
-    <rect x="132" y="207" width="28" height="18" fill="#0f172a" stroke="#f8fafc" stroke-width="2"/>
-  </g>
-
-  <g class="pixel" filter="url(#shadow)">
     <rect x="660" y="154" width="186" height="116" rx="6" class="panel"/>
     <rect x="690" y="140" width="126" height="34" rx="5" class="tab"/>
     <text x="753" y="163" text-anchor="middle" class="label">GAME MENU</text>
@@ -1023,13 +1015,13 @@
   </g>
 
   <g class="pixel" filter="url(#shadow)">
-    <rect x="54" y="318" width="186" height="112" rx="6" class="panel"/>
-    <rect x="88" y="304" width="118" height="34" rx="5" class="tab"/>
-    <text x="147" y="327" text-anchor="middle" class="label">OBJECTS</text>
-    <rect x="83" y="352" width="128" height="50" class="screen"/>
-    <use href="#sprite-moto" x="96" y="366" width="36" height="20" class="sprite"/>
-    <use href="#sprite-f1" x="142" y="366" width="54" height="20" class="sprite"/>
-    <use href="#sprite-container" x="95" y="390" width="80" height="26" class="sprite"/>
+    <rect x="54" y="154" width="186" height="116" rx="6" class="panel"/>
+    <rect x="88" y="140" width="118" height="34" rx="5" class="tab"/>
+    <text x="147" y="163" text-anchor="middle" class="label">OBJECTS</text>
+    <rect x="83" y="188" width="128" height="58" class="screen"/>
+    <use href="#sprite-moto" x="96" y="203" width="22" height="12" class="sprite"/>
+    <use href="#sprite-f1" x="132" y="203" width="32" height="12" class="sprite"/>
+    <use href="#sprite-container" x="96" y="222" width="48" height="16" class="sprite"/>
   </g>
 
   <g class="pixel" filter="url(#shadow)">
@@ -1042,16 +1034,20 @@
   </g>
 
   <g class="pixel" filter="url(#shadow)">
-    <rect x="56" y="452" width="788" height="44" rx="4" fill="url(#road)" stroke="#94a3b8" stroke-width="2"/>
-    <rect x="64" y="466" width="772" height="2" fill="#f8fafc"/>
-    <rect x="64" y="482" width="772" height="2" fill="#f8fafc"/>
-    <text x="76" y="444" class="small">Animated lane strip - same sprite bitmaps used in firmware</text>
-    <g transform="translate(86 468)" class="sprite">
-      <use href="#sprite-player" width="34" height="36" class="jumpBase"/>
-      <use href="#sprite-player-jump" x="42" y="-18" width="48" height="34" class="jumpLarge"/>
+    <rect x="200" y="442" width="500" height="62" rx="4" fill="url(#road)" stroke="#94a3b8" stroke-width="2"/>
+    <rect x="208" y="454" width="484" height="2" fill="#f8fafc"/>
+    <rect x="208" y="468" width="484" height="2" fill="#f8fafc"/>
+    <rect x="208" y="482" width="484" height="2" fill="#f8fafc"/>
+    <rect x="208" y="496" width="484" height="2" fill="#f8fafc"/>
+    <text x="450" y="434" text-anchor="middle" class="small">Animated lane strip - same sprite bitmaps used in firmware</text>
+    <g clip-path="url(#lane-strip-clip)">
+      <g transform="translate(230 458)" class="sprite">
+        <use href="#sprite-player" width="20" height="21" class="jumpBase"/>
+        <use href="#sprite-player-jump" x="36" y="-9" width="29" height="20" class="jumpLarge"/>
+      </g>
+      <g class="sprite carA"><use href="#sprite-moto" x="620" y="456" width="22" height="12"/></g>
+      <g class="sprite carB"><use href="#sprite-f1" x="530" y="471" width="32" height="12"/></g>
+      <g class="sprite carC"><use href="#sprite-container" x="675" y="486" width="48" height="16"/></g>
     </g>
-    <g class="sprite carA"><use href="#sprite-moto" x="760" y="460" width="54" height="30"/></g>
-    <g class="sprite carB"><use href="#sprite-f1" x="660" y="462" width="81" height="30"/></g>
-    <g class="sprite carC"><use href="#sprite-container" x="830" y="456" width="120" height="39"/></g>
   </g>
 </svg>
