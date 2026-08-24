@@ -7,9 +7,9 @@
 
 # Reverse Lane
 
-**1-bit OLED lane-dodge game for the AK Embedded Base Kit STM32L151**
+**A 1-bit OLED traffic-dodge firmware game for the AK Embedded Base Kit STM32L151**
 
-Drive against traffic, dodge incoming vehicles, jump over obstacles and survive as the speed increases.
+Reverse Lane demonstrates event-driven embedded game design with bitmap rendering, button messages, timer ticks and score-based difficulty.
 
 </div>
 
