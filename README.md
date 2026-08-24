@@ -142,7 +142,8 @@ Flash layout:
 ## Board
 
 <p align="center">
-  <img width="343" height="319" alt="AK Embedded Base Kit board" src="https://github.com/user-attachments/assets/b663132f-98f3-4d98-809d-49b3fc4b500f"/>
+<img width="343" height="319" alt="image" src="https://github.com/user-attachments/assets/f015bf1e-d096-4f00-a36f-6b97a3643bb0" />
+
 </p>
 
 ## Build and Flash
@@ -195,4 +196,3 @@ snake/
 |---|---|
 | AK Embedded Base Kit | https://epcb.vn/products/ak-embedded-base-kit-lap-trinh-nhung-vi-dieu-khien-mcu |
 | AK Blog and Tutorial | https://epcb.vn/blogs/ak-embedded-software |
-| README layout reference | https://github.com/MinhQuocNguyenHoang/Panda-Jump-Game |
