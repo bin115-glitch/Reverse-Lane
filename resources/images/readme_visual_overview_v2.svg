@@ -1008,10 +1008,17 @@
     <rect x="690" y="140" width="126" height="34" rx="5" class="tab"/>
     <text x="753" y="163" text-anchor="middle" class="label">GAME MENU</text>
     <rect x="688" y="188" width="130" height="54" class="screen"/>
-    <text x="753" y="207" text-anchor="middle" class="oledText">REVERSE</text>
-    <text x="753" y="224" text-anchor="middle" class="oledText">LANE</text>
-    <use href="#sprite-player" x="702" y="216" width="34" height="36" class="sprite"/>
-    <use href="#sprite-f1" x="760" y="218" width="54" height="20" class="sprite"/>
+    <rect x="694" y="194" width="118" height="12" rx="2" fill="#020617" stroke="#f8fafc" stroke-width="1"/>
+    <rect x="694" y="210" width="118" height="12" rx="2" fill="#f8fafc"/>
+    <rect x="694" y="226" width="118" height="12" rx="2" fill="#f8fafc"/>
+    <path d="M704 197 L711 200 L704 203 M711 200 H720" fill="none" stroke="#f8fafc" stroke-width="1.4"/>
+    <circle cx="708" cy="216" r="4" fill="none" stroke="#020617" stroke-width="1.2"/>
+    <rect x="703" y="230" width="3" height="5" fill="#020617"/>
+    <rect x="709" y="226" width="3" height="9" fill="#020617"/>
+    <rect x="715" y="222" width="3" height="13" fill="#020617"/>
+    <text x="728" y="203" class="oledText">Reverse Lane</text>
+    <text x="728" y="219" fill="#020617" font-size="10" font-family="monospace" font-weight="700">Cai dat</text>
+    <text x="728" y="235" fill="#020617" font-size="10" font-family="monospace" font-weight="700">Thong ke</text>
   </g>
 
   <g class="pixel" filter="url(#shadow)">
