@@ -15,9 +15,6 @@
   <img src="resources/images/readme_visual_overview.svg" alt="Fusion Flight visual overview" width="850"/>
 </p>
 
-<p align="center">
-  <img src="hardware/images/ak-embedded-base-kit-version-3.jpg" alt="AK Embedded Base Kit" width="620"/>
-</p>
 
 ## Main Features
 
