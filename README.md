@@ -14,7 +14,7 @@ Drive against traffic, dodge incoming vehicles, jump over obstacles and survive 
 </div>
 
 <p align="center">
-  <img src="resources/images/readme_visual_overview_v2.svg" alt="Reverse Lane visual overview" width="850"/>
+  <img src="resources/images/readme_visual_overview_v3.svg" alt="Reverse Lane visual overview" width="850"/>
 </p>
 
 ## Table of Contents
