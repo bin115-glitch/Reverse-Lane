@@ -25,11 +25,12 @@ Reverse Lane demonstrates event-driven embedded game design with bitmap renderin
 | 2 | [Introduction](#introduction) | Game overview and project purpose |
 | 3 | [Demo](#demo) | Demo video preview |
 | 4 | [Main Features](#main-features) | Core firmware and game features |
-| 5 | [Game Objects](#game-objects) | Player, jump player, moto, F1 and container bitmaps |
-| 6 | [Basic Game Sequence Logic](#iv-basic-game-sequence-logic) | Time-ordered game messages, actions and render sequence |
-| 7 | [Build and Flash](#build-and-flash) | Build command and STM32CubeProgrammer addresses |
-| 8 | [Project Structure](#project-structure) | Main folders in the repository |
-| 9 | [Documentation](#documentation) | Detailed Markdown guides and DOCX report |
+| 5 | [How to Play](#how-to-play) | Player objective, movement, jump and restart behavior |
+| 6 | [Game Objects](#game-objects) | Player, jump player, moto, F1 and container bitmaps |
+| 7 | [Basic Game Sequence Logic](#iv-basic-game-sequence-logic) | Time-ordered game messages, actions and render sequence |
+| 8 | [Build and Flash](#build-and-flash) | Build command and STM32CubeProgrammer addresses |
+| 9 | [Project Structure](#project-structure) | Main folders in the repository |
+| 10 | [Documentation](#documentation) | Detailed Markdown guides and DOCX report |
 
 ## I. Hardware
 
@@ -89,6 +90,18 @@ The project is designed for the **AK Embedded Base Kit STM32L151** with a **128 
 - Moto, F1 and container objects with different sizes and behavior.
 - Score-based level progression and increasing speed.
 - Game-over, restart and menu navigation flow.
+
+## How to Play
+
+The player drives in the reverse direction while traffic moves toward the player. The goal is to survive as long as possible by changing lanes or jumping over vehicles at the right time.
+
+- Use `SW3` to move the player vehicle up one lane.
+- Use `SW2` to move the player vehicle down one lane.
+- Use `SW4` to jump over an obstacle.
+- When Game Over appears, press `SW4` to restart.
+- Hold `SW4` to leave the game screen and return to the menu.
+- Score increases when an incoming vehicle is successfully avoided.
+- The game becomes faster as the score reaches higher level milestones.
 
 ## Game Objects
 
