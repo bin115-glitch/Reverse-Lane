@@ -1,11 +1,11 @@
 <div align="center">
 
-![MCU](https://img.shields.io/badge/MCU-STM32L151CBT6-03234B?style=flat-square&logo=stmicroelectronics)
-![Display](https://img.shields.io/badge/OLED-128x64_1--bit-white?style=flat-square&labelColor=black)
-![Firmware](https://img.shields.io/badge/Firmware-Reverse_Lane-blue?style=flat-square)
-![Language](https://img.shields.io/badge/Language-C%2FC%2B%2B-orange?style=flat-square)
+![MCU](https://img.shields.io/badge/MCU-STM32L151CBT6-0f172a?style=for-the-badge&labelColor=111827)
+![OLED](https://img.shields.io/badge/OLED-128x64_1--bit-0ea5e9?style=for-the-badge&labelColor=111827)
+![Firmware](https://img.shields.io/badge/Firmware-Reverse_Lane-0284c7?style=for-the-badge&labelColor=111827)
+![Language](https://img.shields.io/badge/Language-C%2FC%2B%2B-38bdf8?style=for-the-badge&labelColor=111827)
 
-# Reverse Lane
+# Reverse Lane - OLED Traffic Dodge Game
 
 **A 1-bit OLED traffic-dodge firmware game for the AK Embedded Base Kit STM32L151**
 
@@ -16,6 +16,16 @@ Reverse Lane demonstrates event-driven embedded game design with bitmap renderin
 <p align="center">
   <img src="resources/images/readme_visual_overview_v3.svg" alt="Reverse Lane visual overview" width="850"/>
 </p>
+
+## Demo
+
+<div align="center">
+  <video
+    src="https://github.com/user-attachments/assets/5d92aeeb-a82b-4d70-9fbb-fb683e4e7e60"
+    controls
+    width="700">
+  </video>
+</div>
 
 ## Table of Contents
 
@@ -34,15 +44,21 @@ Reverse Lane demonstrates event-driven embedded game design with bitmap renderin
 
 ## I. Hardware
 
+### Board Preview
+
 <p align="center">
   <img width="343" height="319" alt="AK Embedded Base Kit STM32L151" src="https://github.com/user-attachments/assets/f015bf1e-d096-4f00-a36f-6b97a3643bb0"/>
 </p>
 
 <p align="center"><b>Figure 1:</b> AK Embedded Base Kit - STM32L151</p>
 
+### Hardware Layout
+
 <p align="center">
   <img width="853" height="473" alt="AK Embedded Base Kit hardware layout" src="https://github.com/user-attachments/assets/7f76fc2a-659a-4de8-a99b-497f18e39d33"/>
 </p>
+
+<p align="center"><b>Figure 2:</b> AK Embedded Base Kit hardware layout, OLED connector and button mapping reference</p>
 
 The **AK Embedded Base Kit** is an evaluation kit for embedded software learners. It integrates a 1.54-inch OLED LCD, 3 push buttons and a buzzer, which are enough to study event-driven systems through a small real-time game. The board also exposes RS485, Qwiic and Grove connectors for broader prototyping.
 
@@ -70,16 +86,6 @@ The **AK Embedded Base Kit** is an evaluation kit for embedded software learners
 **Reverse Lane** is a small embedded game built on the AK event-driven firmware architecture. The player controls a vehicle moving in the reverse direction while traffic approaches from the opposite side. The game uses real 1-bit bitmap sprites, lane-based collision logic, jump handling and score-based difficulty progression.
 
 The project is designed for the **AK Embedded Base Kit STM32L151** with a **128 x 64 monochrome OLED**.
-
-## Demo
-
-<div align="center">
-  <video
-    src="https://github.com/user-attachments/assets/5d92aeeb-a82b-4d70-9fbb-fb683e4e7e60"
-    controls
-    width="700">
-  </video>
-</div>
 
 ## Main Features
 
